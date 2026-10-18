@@ -11,6 +11,7 @@ import ProductList from "../components/ProductList";
 import CategoryList from "../components/CategoryList";
 import { Product } from "../components/Product";
 import { Category } from "../components/Category";
+import CategoryScreen from "./CategoryScreen";
 
 const API_BASE_URL = process.env.EXPO_PUBLIC_API_BASE_URL;
 
@@ -199,9 +200,13 @@ export default function HomeScreen() {
         </View>
 
         {/* Categories */}
+        
         <Text style={[styles.sectionTitle, { color: theme.textPrimary }]}>
           Категорії
         </Text>
+        <CategoryScreen>
+          
+        </CategoryScreen>
 
         <CategoryList
           categories={categories}
