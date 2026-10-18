@@ -23,6 +23,7 @@ export default function HomeScreen() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [sortType, setSortType] = useState<"asc" | "desc" | "name" | null>(null);
 
   useEffect(() => {
     fetchData();
@@ -50,6 +51,7 @@ export default function HomeScreen() {
       setLoading(false);
     }
   };
+  
 
   const filteredProducts = useMemo(() => {
     return products.filter((product) => {
@@ -64,6 +66,15 @@ export default function HomeScreen() {
       return category && search;
     });
   }, [products, selectedCategoryId, searchQuery]);
+  const sortedProducts = useMemo(() => {
+  const sorted = [...filteredProducts];
+
+  if (sortType === "asc") return sorted.sort((a, b) => a.price - b.price);
+  if (sortType === "desc") return sorted.sort((a, b) => b.price - a.price);
+  if (sortType === "name") return sorted.sort((a, b) => a.title.localeCompare(b.title));
+
+  return sorted;
+}, [filteredProducts, sortType]);
 
   const theme = {
     bg: isDarkMode ? "#121212" : "#FFFFFF",
@@ -226,8 +237,21 @@ export default function HomeScreen() {
             ({filteredProducts.length})
           </Text>
         </View>
+        <View style={styles.sortContainer}>
+          <TouchableOpacity style={styles.sortButton} onPress={() => setSortType("asc")}>
+            <Text style={styles.sortText}>Ціна ↑</Text>
+          </TouchableOpacity>
 
-        <ProductList products={filteredProducts} theme={theme} />
+          <TouchableOpacity style={styles.sortButton} onPress={() => setSortType("desc")}>
+            <Text style={styles.sortText}>Ціна ↓</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.sortButton} onPress={() => setSortType("name")}>
+            <Text style={styles.sortText}>Назва</Text>
+          </TouchableOpacity>
+      </View>
+
+        <ProductList products={sortedProducts} theme={theme} />
       </ScrollView>
     </SafeAreaView>
   );
@@ -367,4 +391,22 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 12,
   },
+  sortContainer: {
+  flexDirection: "row",
+  gap: 8,
+  marginBottom: 12,
+},
+
+sortButton: {
+  backgroundColor: "#2E7D32",
+  paddingHorizontal: 12,
+  paddingVertical: 7,
+  borderRadius: 10,
+},
+
+sortText: {
+  color: "white",
+  fontSize: 12,
+  fontWeight: "600",
+},
 });
