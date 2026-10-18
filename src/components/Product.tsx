@@ -1,12 +1,5 @@
-import  { useState } from "react";
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  StyleSheet,
-} from "react-native";
-
+import React from "react";
+import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 export interface Product {
@@ -18,115 +11,73 @@ export interface Product {
   reviews: number;
   image: string;
   categoryId?: string;
+  favorite: boolean;
 }
 
 export interface Theme {
+  bg: string;
   cardBg: string;
   border: string;
   textPrimary: string;
   textSecondary: string;
 }
 
-interface ProductCardProps {
+interface Props {
   product: Product;
   theme: Theme;
+  onFavorite: (product: Product) => void;
 }
 
-export default function ProductCard({
-  product,
-  theme,
-}: ProductCardProps) {
-  const [isFavorite, setIsFavorite] = useState(false);
-
-  const toggleFavorite = () => {
-    setIsFavorite((prev) => !prev);
-  };
-
+export default function ProductCard({ product, theme, onFavorite }: Props) {
   return (
-    <View
-      style={[
-        styles.productCard,
-        {
-          backgroundColor: theme.cardBg,
-          borderColor: theme.border,
-        },
-      ]}
-    >
+    <View style={[styles.card, {
+      backgroundColor: theme.cardBg,
+      borderColor: theme.border
+    }]}>
       <TouchableOpacity
-        onPress={toggleFavorite}
-        style={styles.favoriteButton}
+        style={styles.favorite}
+        onPress={() => onFavorite(product)}
       >
         <Ionicons
-          name={isFavorite ? "heart" : "heart-outline"}
+          name={product.favorite ? "heart" : "heart-outline"}
           size={20}
-          color={isFavorite ? "#ff0000" : "#bdbdbd"}
+          color={product.favorite ? "red" : "#bdbdbd"}
         />
       </TouchableOpacity>
 
       <Image
         source={{ uri: product.image }}
-        style={styles.productImage}
+        style={styles.image}
         resizeMode="contain"
       />
 
       <Text
-        style={[
-          styles.productTitle,
-          { color: theme.textPrimary },
-        ]}
+        style={[styles.title, { color: theme.textPrimary }]}
         numberOfLines={1}
       >
         {product.title}
       </Text>
 
-      <Text
-        style={[
-          styles.productPrice,
-          { color: theme.textPrimary },
-        ]}
-      >
+      <Text style={[styles.price, { color: theme.textPrimary }]}>
         {product.price}{" "}
-        <Text
-          style={[
-            styles.productUnit,
-            { color: theme.textSecondary },
-          ]}
-        >
+        <Text style={[styles.unit, { color: theme.textSecondary }]}>
           {product.unit}
         </Text>
       </Text>
 
-      <View style={styles.productFooter}>
-        <View style={styles.ratingContainer}>
-          <Ionicons
-            name="star"
-            size={14}
-            color="#FFB300"
-          />
+      <View style={styles.footer}>
+        <View style={styles.rating}>
+          <Ionicons name="star" size={14} color="#FFB300" />
 
-          <Text
-            style={[
-              styles.ratingText,
-              { color: theme.textPrimary },
-            ]}
-          >
+          <Text style={{ color: theme.textPrimary }}>
             {product.rating}{" "}
-            <Text style={styles.reviewsText}>
-              ({product.reviews})
-            </Text>
+            <Text style={styles.reviews}>({product.reviews})</Text>
           </Text>
         </View>
 
-        <TouchableOpacity style={styles.addButton}>
-          <Ionicons
-            name="cart-outline"
-            size={16}
-            color="#FFFFFF"
-          />
-
-          <Text style={styles.addButtonText}>
-            Додати
-          </Text>
+        <TouchableOpacity style={styles.add}>
+          <Ionicons name="cart-outline" size={16} color="white" />
+          <Text style={styles.addText}>Додати</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -134,81 +85,73 @@ export default function ProductCard({
 }
 
 const styles = StyleSheet.create({
-  productCard: {
+  card: {
     width: "100%",
     borderRadius: 16,
     padding: 12,
-    position: "relative",
     borderWidth: 1,
   },
 
-  favoriteButton: {
+  favorite: {
     position: "absolute",
     top: 10,
     right: 10,
     zIndex: 1,
   },
 
-  productImage: {
+  image: {
     width: "100%",
     height: 90,
     marginVertical: 8,
   },
 
-  productTitle: {
+  title: {
     fontSize: 14,
     fontWeight: "600",
     marginBottom: 4,
   },
 
-  productPrice: {
+  price: {
     fontSize: 16,
     fontWeight: "bold",
     marginBottom: 8,
   },
 
-  productUnit: {
+  unit: {
     fontSize: 12,
     fontWeight: "normal",
   },
 
-  productFooter: {
+  footer: {
     flexDirection: "row",
-    alignItems: "center",
     justifyContent: "space-between",
-    marginTop: 4,
-  },
-
-  ratingContainer: {
-    flexDirection: "row",
     alignItems: "center",
   },
 
-  ratingText: {
-    fontSize: 12,
-    fontWeight: "bold",
-    marginLeft: 2,
+  rating: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 3,
   },
 
-  reviewsText: {
+  reviews: {
     fontSize: 11,
     color: "#9E9E9E",
-    fontWeight: "normal",
   },
 
-  addButton: {
+  add: {
     flexDirection: "row",
     alignItems: "center",
+    gap: 4,
     backgroundColor: "#2E7D32",
     paddingHorizontal: 8,
     paddingVertical: 6,
     borderRadius: 12,
   },
 
-  addButtonText: {
-    color: "#FFFFFF",
+  addText: {
+    color: "white",
     fontSize: 11,
     fontWeight: "600",
-    marginLeft: 4,
   },
 });

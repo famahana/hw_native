@@ -12,6 +12,7 @@ import CategoryList from "../components/CategoryList";
 import { Product } from "../components/Product";
 import { Category } from "../components/Category";
 import CategoryScreen from "./CategoryScreen";
+import FavoritesScreen from "./FavoriteScreen";
 
 const API_BASE_URL = process.env.EXPO_PUBLIC_API_BASE_URL;
 
@@ -24,6 +25,7 @@ export default function HomeScreen() {
   const [error, setError] = useState<string | null>(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [sortType, setSortType] = useState<"asc" | "desc" | "name" | null>(null);
+  const [showFavorites, setShowFavorites] = useState(false);
 
   useEffect(() => {
     fetchData();
@@ -51,6 +53,29 @@ export default function HomeScreen() {
       setLoading(false);
     }
   };
+  const toggleFavorite = async (product: Product) => {
+  const favorite = !product.favorite;
+
+  try {
+    const res = await fetch(`${API_BASE_URL}/products/${product.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ favorite }),
+    });
+
+    if (!res.ok) throw new Error();
+
+    setProducts(prev =>
+      prev.map(p =>
+        p.id === product.id ? { ...p, favorite } : p
+      )
+    );
+  } catch (err) {
+    console.error("Помилка зміни обраного", err);
+  }
+};
   
 
   const filteredProducts = useMemo(() => {
@@ -111,7 +136,16 @@ export default function HomeScreen() {
       </SafeAreaView>
     );
   }
-
+  if (showFavorites) {
+    return (
+      <FavoritesScreen
+        products={products}
+        theme={theme}
+        onFavorite={toggleFavorite}
+        onBack={() => setShowFavorites(false)}
+      />
+    );
+  }
   const productsTitle = selectedCategoryId
     ? categories.find((c) => String(c.id) === String(selectedCategoryId))?.name || "Товари"
     : "Популярні товари";
@@ -145,8 +179,19 @@ export default function HomeScreen() {
                 size={20}
                 color={isDarkMode ? "#FFD54F" : "#FFA000"}
               />
-              <Switch value={isDarkMode} onValueChange={setIsDarkMode} />
+
+              <Switch
+                value={isDarkMode}
+                onValueChange={setIsDarkMode}
+              />
             </View>
+
+            <TouchableOpacity
+              style={[styles.notificationButton, { backgroundColor: theme.inputBg }]}
+              onPress={() => setShowFavorites(true)}
+            >
+              <Ionicons name="heart-outline" size={22} color="red" />
+            </TouchableOpacity>
 
             <TouchableOpacity
               style={[styles.notificationButton, { backgroundColor: theme.inputBg }]}
@@ -156,9 +201,6 @@ export default function HomeScreen() {
                 size={22}
                 color={theme.textPrimary}
               />
-              <View style={styles.badge}>
-                <Text style={styles.badgeText}>3</Text>
-              </View>
             </TouchableOpacity>
           </View>
         </View>
@@ -251,7 +293,8 @@ export default function HomeScreen() {
           </TouchableOpacity>
       </View>
 
-        <ProductList products={sortedProducts} theme={theme} />
+        <ProductList products={sortedProducts} theme={theme} onFavorite={toggleFavorite} />
+        
       </ScrollView>
     </SafeAreaView>
   );

@@ -1,73 +1,36 @@
+import React from "react";
+import { FlatList, View, StyleSheet, useWindowDimensions } from "react-native";
+import ProductCard, { Product, Theme } from "./Product";
 
-import {
-  FlatList,
-  View,
-  StyleSheet,
-  useWindowDimensions,
-} from "react-native";
-
-import ProductCard, {
-  Product,
-  Theme,
-} from "./Product";
-
-interface ProductListProps {
+interface Props {
   products: Product[];
   theme: Theme;
+  onFavorite: (product: Product) => void;
 }
 
-export default function ProductList({
-  products,
-  theme,
-}: ProductListProps) {
+export default function ProductList({ products, theme, onFavorite }: Props) {
   const { width, height } = useWindowDimensions();
 
-  const isPortrait = height >= width;
-  const isTablet = Math.min(width, height) >= 600;
+  const tablet = Math.min(width, height) >= 600;
+  const portrait = height >= width;
 
-  let columns = 1;
-
-  if (isTablet) {
-    columns = isPortrait ? 2 : 3;
-  } else {
-    columns = isPortrait ? 1 : 2;
-  }
-
-  const getItemWidth = () => {
-    if (columns === 1) {
-      return "100%";
-    }
-
-    if (columns === 2) {
-      return "48%";
-    }
-
-    return "31%";
-  };
+  const columns = tablet ? (portrait ? 2 : 3) : portrait ? 1 : 2;
+  const itemWidth = columns === 1 ? "100%" : columns === 2 ? "48%" : "31%";
 
   return (
     <FlatList
-      key={`products-${columns}`}
+      key={columns}
       data={products}
       numColumns={columns}
       scrollEnabled={false}
-      keyExtractor={(item) => item.id.toString()}
-      contentContainerStyle={styles.list}
-      columnWrapperStyle={
-        columns > 1
-          ? styles.columnWrapper
-          : undefined
-      }
+      keyExtractor={(item) => String(item.id)}
+      columnWrapperStyle={columns > 1 ? styles.row : undefined}
       renderItem={({ item }) => (
-        <View
-          style={[
-            styles.item,
-            { width: getItemWidth() },
-          ]}
-        >
+        <View style={{ width: itemWidth, marginBottom: 16 }}>
           <ProductCard
             product={item}
             theme={theme}
+            onFavorite={onFavorite}
           />
         </View>
       )}
@@ -76,15 +39,7 @@ export default function ProductList({
 }
 
 const styles = StyleSheet.create({
-  list: {
-    paddingBottom: 16,
-  },
-
-  columnWrapper: {
+  row: {
     justifyContent: "space-between",
-  },
-
-  item: {
-    marginBottom: 16,
   },
 });

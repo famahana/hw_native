@@ -5,49 +5,56 @@
       "name": "Фрукти",
       "icon": "fruit-cherries",
       "bgColor": "#FFF3E0",
-      "iconColor": "#E65100"
+      "iconColor": "#E65100",
+      "favorite": false
     },
     {
       "id": "cat_vegetables",
       "name": "Овочі",
       "icon": "carrot",
       "bgColor": "#E8F5E9",
-      "iconColor": "#2E7D32"
+      "iconColor": "#2E7D32",
+      "favorite": false
     },
     {
       "id": "cat_dairy",
       "name": "Молочка",
       "icon": "cheese",
       "bgColor": "#FFFDE7",
-      "iconColor": "#FBC02D"
+      "iconColor": "#FBC02D",
+      "favorite": false
     },
     {
       "id": "cat_bakery",
       "name": "Випічка",
       "icon": "bread-slice",
       "bgColor": "#EFEBE9",
-      "iconColor": "#6D4C41"
+      "iconColor": "#6D4C41",
+      "favorite": false
     },
     {
       "id": "cat_drinks",
       "name": "Напої",
       "icon": "bottle-soda-classic",
       "bgColor": "#E1F5FE",
-      "iconColor": "#0288D1"
+      "iconColor": "#0288D1",
+      "favorite": false
     },
     {
       "name": "test",
       "icon": "https://png.pngtree.com/png-vector/20190223/ourmid/pngtree-test-line-black-icon-png-image_690888.jpg",
       "bgColor": "black",
       "iconColor": "#2E7D32",
-      "id": "TcuVf6g7dBQ"
+      "id": "TcuVf6g7dBQ",
+      "favorite": false
     },
     {
       "name": "123",
       "icon": "2",
       "bgColor": "13",
       "iconColor": "#2E7D32",
-      "id": "gNwDYcr2p34"
+      "id": "gNwDYcr2p34",
+      "favorite": false
     }
   ],
   "products": [
@@ -59,7 +66,8 @@
       "unit": "грн/кг",
       "rating": 4.9,
       "reviews": 128,
-      "image": "https://cdn-icons-png.flaticon.com/512/3137/3137044.png"
+      "image": "https://cdn-icons-png.flaticon.com/512/3137/3137044.png",
+      "favorite": true
     },
     {
       "id": "p2",
@@ -69,7 +77,8 @@
       "unit": "грн/кг",
       "rating": 4.7,
       "reviews": 85,
-      "image": "https://cdn-icons-png.flaticon.com/512/415/415733.png"
+      "image": "https://cdn-icons-png.flaticon.com/512/415/415733.png",
+      "favorite": false
     },
     {
       "id": "p3",
@@ -79,7 +88,8 @@
       "unit": "грн/500г",
       "rating": 4.9,
       "reviews": 210,
-      "image": "https://cdn-icons-png.flaticon.com/512/590/590685.png"
+      "image": "https://cdn-icons-png.flaticon.com/512/590/590685.png",
+      "favorite": true
     },
     {
       "id": "p4",
@@ -89,7 +99,8 @@
       "unit": "грн/кг",
       "rating": 4.6,
       "reviews": 94,
-      "image": "https://cdn-icons-png.flaticon.com/512/1728/1728791.png"
+      "image": "https://cdn-icons-png.flaticon.com/512/1728/1728791.png",
+      "favorite": true
     },
     {
       "id": "p5",
@@ -99,7 +110,8 @@
       "unit": "грн/уп",
       "rating": 4.8,
       "reviews": 64,
-      "image": "https://cdn-icons-png.flaticon.com/512/1202/1202125.png"
+      "image": "https://cdn-icons-png.flaticon.com/512/1202/1202125.png",
+      "favorite": false
     },
     {
       "id": "p6",
@@ -109,7 +121,8 @@
       "unit": "грн/шт",
       "rating": 4.6,
       "reviews": 42,
-      "image": "https://cdn-icons-png.flaticon.com/512/1147/1147803.png"
+      "image": "https://cdn-icons-png.flaticon.com/512/1147/1147803.png",
+      "favorite": false
     },
     {
       "id": "p7",
@@ -119,7 +132,8 @@
       "unit": "грн/кг",
       "rating": 4.5,
       "reviews": 51,
-      "image": "https://cdn-icons-png.flaticon.com/512/2347/2347000.png"
+      "image": "https://cdn-icons-png.flaticon.com/512/2347/2347000.png",
+      "favorite": false
     },
     {
       "id": "p8",
@@ -129,7 +143,8 @@
       "unit": "грн/кг",
       "rating": 4.7,
       "reviews": 38,
-      "image": "https://cdn-icons-png.flaticon.com/512/2346/2346988.png"
+      "image": "https://cdn-icons-png.flaticon.com/512/2346/2346988.png",
+      "favorite": false
     },
     {
       "id": "p9",
@@ -139,7 +154,8 @@
       "unit": "грн/шт",
       "rating": 4.8,
       "reviews": 95,
-      "image": "https://cdn-icons-png.flaticon.com/512/2983/2983788.png"
+      "image": "https://cdn-icons-png.flaticon.com/512/2983/2983788.png",
+      "favorite": false
     },
     {
       "id": "p10",
@@ -149,7 +165,8 @@
       "unit": "грн/200г",
       "rating": 4.9,
       "reviews": 53,
-      "image": "https://cdn-icons-png.flaticon.com/512/2203/2203182.png"
+      "image": "https://cdn-icons-png.flaticon.com/512/2203/2203182.png",
+      "favorite": false
     },
     {
       "id": "p11",
@@ -159,7 +176,8 @@
       "unit": "грн/шт",
       "rating": 4.7,
       "reviews": 72,
-      "image": "https://cdn-icons-png.flaticon.com/512/2312/2312384.png"
+      "image": "https://cdn-icons-png.flaticon.com/512/2312/2312384.png",
+      "favorite": false
     },
     {
       "id": "p12",
@@ -169,7 +187,8 @@
       "unit": "грн/200г",
       "rating": 4.9,
       "reviews": 110,
-      "image": "https://cdn-icons-png.flaticon.com/512/805/805370.png"
+      "image": "https://cdn-icons-png.flaticon.com/512/805/805370.png",
+      "favorite": false
     },
     {
       "id": "p13",
@@ -179,7 +198,8 @@
       "unit": "грн/шт",
       "rating": 4.7,
       "reviews": 31,
-      "image": "https://cdn-icons-png.flaticon.com/512/992/992747.png"
+      "image": "https://cdn-icons-png.flaticon.com/512/992/992747.png",
+      "favorite": false
     },
     {
       "id": "p14",
@@ -189,7 +209,8 @@
       "unit": "грн/шт",
       "rating": 4.9,
       "reviews": 142,
-      "image": "https://cdn-icons-png.flaticon.com/512/3014/3014522.png"
+      "image": "https://cdn-icons-png.flaticon.com/512/3014/3014522.png",
+      "favorite": false
     },
     {
       "id": "p15",
@@ -199,7 +220,8 @@
       "unit": "грн/шт",
       "rating": 4.8,
       "reviews": 60,
-      "image": "https://cdn-icons-png.flaticon.com/512/3014/3014288.png"
+      "image": "https://cdn-icons-png.flaticon.com/512/3014/3014288.png",
+      "favorite": false
     },
     {
       "id": "p16",
@@ -209,7 +231,8 @@
       "unit": "грн/л",
       "rating": 4.5,
       "reviews": 77,
-      "image": "https://cdn-icons-png.flaticon.com/512/2405/2405479.png"
+      "image": "https://cdn-icons-png.flaticon.com/512/2405/2405479.png",
+      "favorite": false
     },
     {
       "id": "p17",
@@ -219,7 +242,8 @@
       "unit": "грн/1.5л",
       "rating": 4.8,
       "reviews": 180,
-      "image": "https://cdn-icons-png.flaticon.com/512/3100/3100553.png"
+      "image": "https://cdn-icons-png.flaticon.com/512/3100/3100553.png",
+      "favorite": false
     },
     {
       "id": "p18",
@@ -229,7 +253,8 @@
       "unit": "грн/0.5л",
       "rating": 4.4,
       "reviews": 49,
-      "image": "https://cdn-icons-png.flaticon.com/512/2935/2935307.png"
+      "image": "https://cdn-icons-png.flaticon.com/512/2935/2935307.png",
+      "favorite": false
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
